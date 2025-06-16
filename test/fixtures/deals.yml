@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  original_price: 1.5
+  discount_price: 1.5
+  discount_percentage: 1.5
+  category: MyString
+  subcategory: MyString
+  tags: 
+  merchant_name: MyString
+  merchant_rating: 1.5
+  quantity_sold: 1
+  expiry_date: 2025-06-16
+  featured_deal: false
+  image_url: MyString
+  fine_print: MyText
+  review_count: 1
+  average_rating: 1.5
+  available_quantity: 1
+
+two:
+  title: MyString
+  description: MyText
+  original_price: 1.5
+  discount_price: 1.5
+  discount_percentage: 1.5
+  category: MyString
+  subcategory: MyString
+  tags: 
+  merchant_name: MyString
+  merchant_rating: 1.5
+  quantity_sold: 1
+  expiry_date: 2025-06-16
+  featured_deal: false
+  image_url: MyString
+  fine_print: MyText
+  review_count: 1
+  average_rating: 1.5
+  available_quantity: 1
