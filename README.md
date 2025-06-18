@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For this app to run locally you will need:
 
-Things you may want to cover:
+* Ruby version: `>= 3.3.2`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
+* Rails version: `>8`
 
 * Database creation
 
+    You will need to have postgres set up
+
 * Database initialization
+
+    `rails db:create db:migrate db:seed`
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+    `bundle exec rspec`
 
-* Deployment instructions
-
-* ...
