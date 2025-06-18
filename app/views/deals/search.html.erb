@@ -1,0 +1,94 @@
+<div class="deals-container">
+  <h1>Deal Search Results</h1>
+
+  <div class="search-filters">
+    <%= form_with url: root_path, method: :get, local: true do |f| %>
+      <div class="filter-group">
+        <%= f.label :category, "Category" %>
+        <%= f.text_field :category, name: 'filters[category]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :subcategory, "Subcategory" %>
+        <%= f.text_field :category, name: 'filters[subcategory]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :tags, "Tags" %>
+        <%= f.text_field :tags, name: 'filters[tags]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :min_price, "Min Price" %>
+        <%= f.number_field :min_price, step: 10, default: params[:filters][:min_price].presence || 0, name: 'filters[min_price]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :max_price, "Max Price" %>
+        <%= f.number_field :max_price, step: 10, default: params[:filters][:max_price].presence || 10000, name: 'filters[max_price]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :lat, "Latitude" %>
+        <%= f.text_field :lat %>
+
+        <%= f.label :long, "Longitude" %>
+        <%= f.text_field :long %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :featured_deal, "Featured deal" %>
+        <%= f.check_box :featured_deal, name: 'filters[featured_deal]' %>
+      </div>
+
+      <div class="filter-group">
+        <%= f.label :sort, "Sort By" %>
+        <%= f.select :sort, [['Discount %', 'discount'], ['Distance', 'distance'], ['Price', 'price'], ['Rating', 'rating'], ['Popularity', 'popularity']] %>
+      </div>
+
+       <div class="filter-group">
+        <%= f.label :sort_direction, "Sort Direction" %>
+        <%= f.select :sort_direction, ['asc', 'desc'] %>
+      </div>
+
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <div class="deals-list">
+    <% if @deals.any? %>
+      <% @deals.each do |deal| %>
+        <div class="deal-card">
+          <div class="deal-image">
+            <%= image_tag deal.image_url, alt: deal.title if deal.image_url.present? %>
+          </div>
+          <div class="deal-details">
+            <h2><%= deal.title %></h2>
+            <p class="merchant">By <%= deal.merchant_name %> (<%= deal.merchant_rating %> ★)</p>
+            <p class="price">
+              <span class="original-price"><%= number_to_currency(deal.original_price) %></span>
+              <span class="discount-price"><%= number_to_currency(deal.discount_price) %></span>
+              <span class="discount-percentage"><%= deal.discount_percentage %>% OFF</span>
+            </p>
+            <p class="description"><%= deal.description %></p>
+            <p class="category"><%= deal.category %> > <%= deal.subcategory %></p>
+            <p class="expiry">Expires: <%= deal.expiry_date.strftime('%b %d, %Y') %></p>
+            <p class="locations">Locations: <%= deal.locations.map { |loc| [loc.address, loc.city, loc.state].join(", ") } %></p>
+            <p class="score">Score: <%= deal.instance_variable_get(:@score).round(2) %></p>
+            <% if deal.respond_to?(:distance) %>
+                <p class="distance">Distance: <%= deal.distance.ceil %> meters</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="no-results">No deals found matching your criteria.</p>
+    <% end %>
+  </div>
+
+  <% if @deals.any? %>
+    <div class="pagination">
+      <%# Add pagination links here %>
+    </div>
+  <% end %>
+</div>
